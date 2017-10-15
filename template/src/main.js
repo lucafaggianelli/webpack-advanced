@@ -26,7 +26,14 @@ import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{#router}}
 import router from './router'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{/router}}
-
+{{#vuex}}
+import store from './store'
+{{/vuex}}
+{{#vuex}}{{#router}}
+// Routing logic
+import { sync } from 'vuex-router-sync'
+sync(store, router)
+{{/router}}{{/vuex}}
 {{#alacarte}}
 Vue.use(Vuetify, {
   components: {
@@ -53,6 +60,9 @@ new Vue({
   {{#router}}
   router,
   {{/router}}
+  {{#vuex}}
+  store,
+  {{/vuex}}
   {{#if_eq build "runtime"}}
   render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
   {{/if_eq}}

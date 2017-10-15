@@ -1,120 +1,84 @@
 <template>
   <v-app light>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      app
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
-      <v-btn
-        icon
-        light
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+    <main-navigation></main-navigation>
+
+    <v-toolbar
+        app
+        fixed
+        clipped-left
+        class="primary"
+        dark
+        :dense="!!secondaryNav">
+      <v-toolbar-side-icon @click.stop="toggleSidebar()" />
+
+      <v-toolbar-title
+          class="hidden-sm-and-down"
+          :html="config.title">
+        <router-link to="/" class="white--text mr-4">
+        </router-link>
+      </v-toolbar-title>
+
+      <v-toolbar-title :html="$route.meta.title || pageTitle || $route.name">
+      </v-toolbar-title>
+
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        light
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <global-search></global-search>
+
+      <v-toolbar-items class="hidden-sm-and-down" v-if="!profile">
+        <v-btn
+            :href="{ path: '/login', query: { redirect: $route.path } }"
+            flat>
+          Login
+        </v-btn>
+      </v-toolbar-items>
+
+      <secondary-nav v-if="secondaryNav" slot="extension"></secondary-nav>
     </v-toolbar>
+
     <main>
       <v-content>
-        <v-container fluid>
-          <v-slide-y-transition mode="out-in">
-            <v-layout column align-center>
-              <img src="/static/v.png" alt="Vuetify.js" class="mb-5">
-              <blockquote>
-                &#8220;First, solve the problem. Then, write the code.&#8221;
-                <footer>
-                  <small>
-                    <em>&mdash;John Johnson</em>
-                  </small>
-                </footer>
-              </blockquote>
-            </v-layout>
-          </v-slide-y-transition>
+        <v-container fluid grid-list-lg>
+          <router-view></router-view>
         </v-container>
       </v-content>
+      <global-snackbar></global-snackbar>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      app
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
-    </v-footer>
+
   </v-app>
 </template>
 
 <script>
-  export default {
-    data{{#unless_eq lintConfig "airbnb"}} {{/unless_eq}}() {
-      return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [{
-          icon: 'bubble_chart',
-          title: 'Inspire'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-        }],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-      }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-    }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import config from '@/config'
+import { mapMutations, mapState } from 'vuex'
+import MainNavigation from '@/components/layout/MainNavigation'
+import SecondaryNav from '@/components/layout/SecondaryNav'
 
+export default {
+  name: 'MainLayout',
+  components: {
+    MainNavigation,
+    SecondaryNav{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+  },
+  data{{#unless_eq lintConfig "airbnb"}} {{/unless_eq}}() {
+    return {
+      config{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+    }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+  },
+  computed: {
+    ...mapState('navigation', [
+      'secondaryNav',
+      'pageTitle'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+    ]),
+    ...mapState('user', [
+      'profile'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+    ]){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+  },
+  methods: {
+    ...mapMutations('navigation', [
+      'toggleSidebar'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+    ]){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+  }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+}{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 </script>
 
 <style lang="stylus">

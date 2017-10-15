@@ -1,12 +1,6 @@
 import firebase from 'firebase'
+import config from '@/config'
 
-const firebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyDzyTCzJCIdio9rTiF9XFwR04kjZY3ZXng',
-  authDomain: 'project-atlas-8621c.firebaseapp.com',
-  databaseURL: 'https://project-atlas-8621c.firebaseio.com',
-  projectId: 'project-atlas-8621c',
-  storageBucket: 'project-atlas-8621c.appspot.com',
-  messagingSenderId: '713781402583'
-})
+const firebaseApp = firebase.initializeApp(config.firebase)
 
 export default firebaseApp.database()

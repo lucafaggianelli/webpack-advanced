@@ -14,6 +14,11 @@ module.exports = {
       "required": true,
       "message": "Project name"
     },
+    "title": {
+      "type": "string",
+      "required": true,
+      "message": "App title"
+    },
     "description": {
       "type": "string",
       "required": false,
@@ -44,9 +49,17 @@ module.exports = {
       "type": "confirm",
       "message": "Install vue-router?"
     },
+    "vuex": {
+      "type": "confirm",
+      "message": "Install vuex?"
+    },
     "firebase": {
       "type": "confirm",
       "message": "Use Firebase?"
+    },
+    "roles": {
+      "type": "confirm",
+      "message": "Install vue-kindergarten for roles and plans?"
     },
     "lint": {
       "type": "confirm",
@@ -89,8 +102,7 @@ module.exports = {
     },
     "theme": {
       "type": "confirm",
-      "message": "Use custom theme?",
-      "default": false
+      "message": "Use custom theme?"
     }
   },
   "filters": {
@@ -101,7 +113,10 @@ module.exports = {
     "build/webpack.test.conf.js": "unit",
     "test/e2e/**/*": "e2e",
     "src/router/**/*": "router",
-    "src/firebase/**/*": "firebase"
+    "src/store/**/*": "vuex",
+    "src/firebase/**/*": "firebase",
+    "src/plans/**/*": "roles",
+    "src/roles/**/*": "roles"
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
