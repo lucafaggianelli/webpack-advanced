@@ -21,7 +21,10 @@ import {
 {{else}}
 import Vuetify from 'vuetify'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{/alacarte}}
-
+import config from './config'
+{{#firebase}}
+import firebase from 'firebase'
+{{/firebase}}
 import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{#router}}
 import router from './router'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
@@ -51,8 +54,17 @@ Vue.use(Vuetify, {
 {{else}}
 Vue.use(Vuetify){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{/alacarte}}
+{{#roles}}
+import VueKindergarten from 'vue-kindergarten'
+import child from '@/roles/child'
+
+Vue.use(VueKindergarten, { child })
+{{/roles}}
 
 Vue.config.productionTip = false{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+
+// Set title to app name
+document.title = config.title
 
 /* eslint-disable no-new */
 new Vue({
@@ -71,3 +83,17 @@ new Vue({
   components: { App }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
   {{/if_eq}}
 }){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+
+{{#firebase}}
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    {{#vuex}}store.dispatch('user/getProfile', user){{/vuex}}
+    {{#router}}
+    if (router.currentRoute.name === 'login') {
+      router.push({
+        path: router.currentRoute.query.redirect || '/'
+      })
+    }{{/router}}
+  }
+})
+{{/firebase}}

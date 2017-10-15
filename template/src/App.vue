@@ -13,12 +13,12 @@
 
       <v-toolbar-title
           class="hidden-sm-and-down"
-          :html="config.title">
+          v-html="config.title">
         <router-link to="/" class="white--text mr-4">
         </router-link>
       </v-toolbar-title>
 
-      <v-toolbar-title :html="$route.meta.title || pageTitle || $route.name">
+      <v-toolbar-title v-html="$route.meta.title || pageTitle || $route.name">
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -50,12 +50,16 @@
 <script>
 import config from '@/config'
 import { mapMutations, mapState } from 'vuex'
+import GlobalSearch from '@/components/layout/GlobalSearch'
+import GlobalSnackbar from '@/components/layout/GlobalSnackbar'
 import MainNavigation from '@/components/layout/MainNavigation'
 import SecondaryNav from '@/components/layout/SecondaryNav'
 
 export default {
   name: 'MainLayout',
   components: {
+    GlobalSearch,
+    GlobalSnackbar,
     MainNavigation,
     SecondaryNav{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
   },
@@ -77,6 +81,9 @@ export default {
     ...mapMutations('navigation', [
       'toggleSidebar'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
     ]){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+  },
+  mounted{{#unless_eq lintConfig "airbnb"}} {{/unless_eq}}() {
+    this.$store.commit('navigation/setMainNav'){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
   }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
 }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 </script>

@@ -118,5 +118,5 @@ module.exports = {
     "src/plans/**/*": "roles",
     "src/roles/**/*": "roles"
   },
-  "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
+  "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  <Fill firebase credentials in src/config/index.js>\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };

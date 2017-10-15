@@ -17,7 +17,7 @@
               <v-icon>\{{ item.icon }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title :html="item.name"></v-list-tile-title>
+              <v-list-tile-title v-text="item.name"></v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-icon>keyboard_arrow_down</v-icon>
@@ -39,7 +39,7 @@
             <v-icon>\{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.name" />
+            <v-list-tile-title v-text="item.name"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </template>
@@ -48,7 +48,8 @@
      <footer class="fixed">
       <template v-if="userPlan.id === 'free'">
         <v-divider></v-divider>
-        <v-subheader :html="`${userPlan.name} plan`">
+        <v-subheader>
+          \{{ userPlan.name }} plan
           <v-spacer></v-spacer>
           <v-btn
               class="accent--text"
@@ -59,8 +60,8 @@
         </v-subheader>
       </template>
       <v-divider></v-divider>
-      <v-subheader class="py-3 grey lighten-4 grey--text text--darken-1"
-        :html="`${config.title} v${config.version} &copy; ${year}`">
+      <v-subheader class="py-3 grey lighten-4 grey--text text--darken-1">
+        \{{ config.title }} v\{{ config.version }} &copy; \{{ year }}
       </v-subheader>
     </footer>
   </v-navigation-drawer>

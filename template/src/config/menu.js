@@ -5,19 +5,9 @@ import adminPerimeter from '@/roles/adminPerimeter'
 
 const menu = [
   {
-    name: 'Portfolio',
-    link: { name: 'portfolio' },
-    icon: 'credit_card'
-  },
-  {
-    name: 'Projects',
-    link: { name: 'projects' },
-    icon: 'work'
-  },
-  {
-    name: 'WBS',
-    link: { name: 'wbs' },
-    icon: 'device_hub'
+    name: 'Hello',
+    link: { name: 'Hello' },
+    icon: 'bubble_chart'
   }
 ]
 
@@ -30,16 +20,6 @@ const adminMenu = [
         name: 'Settings',
         link: { name: 'admin-settings' },
         icon: 'settings'
-      },
-      {
-        name: 'Announcements',
-        link: { name: 'admin-announcements' },
-        icon: 'announcement'
-      },
-      {
-        name: 'Data Import',
-        link: { name: 'data-import' },
-        icon: 'cloud_download'
       }
     ]
   }
