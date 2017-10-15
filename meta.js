@@ -115,6 +115,7 @@ module.exports = {
     "src/router/**/*": "router",
     "src/store/**/*": "vuex",
     "src/firebase/**/*": "firebase",
+    "functions": "firebase",
     "src/plans/**/*": "roles",
     "src/roles/**/*": "roles"
   },
