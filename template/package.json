@@ -19,6 +19,9 @@
     "firebase": "^4.5.1",
     {{/firebase}}
     "fuse.js": "^3.2.0",
+    {{#tracking}}
+    "raven-js": "^3.18.1",
+    {{/tracking}}
     "vue": "^2.5.2",
     {{#roles}}
     "vue-kindergarten": "^0.3.2",
@@ -26,6 +29,9 @@
     {{#router}}
     "vue-router": "^3.0.1",
     {{/router}}
+    {{#firebase}}
+    "vuefire": "^1.4.4",
+    {{/firebase}}
     "vuetify": "^0.16.6"{{#vuex}},
     "vuex": "^3.0.0",
     "vuex-router-sync": "^5.0.0"{{/vuex}}

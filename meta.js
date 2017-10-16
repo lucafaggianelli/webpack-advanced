@@ -61,6 +61,10 @@ module.exports = {
       "type": "confirm",
       "message": "Install vue-kindergarten for roles and plans?"
     },
+    "tracking": {
+      "type": "confirm",
+      "message": "Install Sentry for tracking?"
+    },
     "lint": {
       "type": "confirm",
       "message": "Use ESLint to lint your code?"
@@ -117,7 +121,8 @@ module.exports = {
     "src/firebase/**/*": "firebase",
     "functions": "firebase",
     "src/plans/**/*": "roles",
-    "src/roles/**/*": "roles"
+    "src/roles/**/*": "roles",
+    "src/tracking/**/*": "tracking"
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  <Fill firebase credentials in src/config/index.js>\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };

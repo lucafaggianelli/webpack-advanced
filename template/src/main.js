@@ -24,6 +24,8 @@ import Vuetify from 'vuetify'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 import config from './config'
 {{#firebase}}
 import firebase from 'firebase'
+import VueFire from 'vuefire'
+Vue.use(VueFire)
 {{/firebase}}
 import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
 {{#router}}

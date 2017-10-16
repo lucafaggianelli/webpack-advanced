@@ -2,7 +2,7 @@ import packageJson from '../../package.json'
 
 export default {
   version: packageJson.version,
-  title: '{{ title }}',
+  title: '{{ title }}'{{#firebase}},
   firebase: {
     apiKey: '',
     authDomain: '',
@@ -10,6 +10,7 @@ export default {
     projectId: '',
     storageBucket: '',
     messagingSenderId: ''
-  },
-  stripeApiKey: 'pk_'
+  }{{/firebase}}{{#tracking}},
+  sentry: ''{{/tracking}}{{#payements}},
+  stripeApiKey: 'pk_'{{/payements}}
 }
